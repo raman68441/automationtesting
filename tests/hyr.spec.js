@@ -8,7 +8,7 @@ const [newPage] = await Promise.all([
     page.waitForEvent('popup'),
     page.locator('#newWindowBtn').click()
 ]);
-
+//dkiekkdiek
 await newPage.waitForLoadState();
 
 console.log(await newPage.title());
