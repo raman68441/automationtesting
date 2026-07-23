@@ -10,8 +10,6 @@ await page.locator('#ide').selectOption([
   { index: 0 },
   { index: 2 }
 ]);
-
-
-
+////dkiekd
 
 });
