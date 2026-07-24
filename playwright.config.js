@@ -4,33 +4,38 @@ import { defineConfig, devices } from '@playwright/test';
 export default defineConfig({
   testDir: './tests',
 
-  // Run tests in parallel
   fullyParallel: true,
 
-  // Prevent accidental test.only in CI
   forbidOnly: !!process.env.CI,
 
-  // Retry failed tests only in CI
   retries: process.env.CI ? 2 : 0,
 
-  // Use one worker in CI
   workers: process.env.CI ? 1 : undefined,
 
-  // HTML Report
-  reporter: 'html',
+  reporter: [
+    ['html', {
+      outputFolder: 'playwright-report',
+      open: 'never'
+    }],
+    ['list']
+  ],
 
-  // Shared settings
   use: {
-    headless: false,          // Opens browser in headed mode
-    viewport: null,           // Opens browser maximized
-    trace: 'on-first-retry',
+    headless: false,
+
+    viewport: null,
+
+    screenshot: 'on',
+
+    video: 'on',
+
+    trace: 'on',
 
     launchOptions: {
-      slowMo: 500             // Slows execution by 500 ms
+      slowMo: 500
     }
   },
 
-  // Browser Configuration
   projects: [
     {
       name: 'chromium',
@@ -39,7 +44,6 @@ export default defineConfig({
       },
     },
 
-    // Uncomment if you want Firefox
     // {
     //   name: 'firefox',
     //   use: {
@@ -47,7 +51,6 @@ export default defineConfig({
     //   },
     // },
 
-    // Uncomment if you want WebKit
     // {
     //   name: 'webkit',
     //   use: {
